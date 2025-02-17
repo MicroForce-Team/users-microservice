@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: Users_Microservice
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: microservice
+    password: microservice
+    driver-class-name: org.postgresql.Driver
+
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    change-log: db/changelog/master.yaml
+    enabled: true
+
+# ==================
+# JWT Configuration
+# ==================
+jwt:
+  secret: Wdx7ZeyAoF1pZ4R7Ksc5q9ut03Hw3HYyqN3Ei2Ly+H7zXLP44xZQwp65wwroBO3S
+  access:
+    expiration: 900000
+  refresh:
+    expiration: 7200000
+
+
+
