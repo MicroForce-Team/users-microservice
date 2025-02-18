@@ -1,0 +1,106 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Mehdi
+      changes:
+        - createTable:
+            tableName: adresse
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: street
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: postal_code
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_adresse_app_user
+            baseTableName: adresse
+            baseColumnNames: user_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 2
+      author: Mehdi
+      changes:
+        - createTable:
+            tableName: panier
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    unique: true
+        - addForeignKeyConstraint:
+            constraintName: fk_panier_app_user
+            baseTableName: panier
+            baseColumnNames: user_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+
+  - changeSet:
+      id: 3
+      author: Mehdi
+      changes:
+        - createTable:
+            tableName: panier_item
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: panier_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_panier_item_panier
+            baseTableName: panier_item
+            baseColumnNames: panier_id
+            referencedTableName: panier
+            referencedColumnNames: id
